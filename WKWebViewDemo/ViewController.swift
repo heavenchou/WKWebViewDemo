@@ -9,13 +9,11 @@
 import Cocoa
 import WebKit
 
-class ViewController: NSViewController, WKUIDelegate, WKNavigationDelegate {
+class ViewController: NSViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
     
     // MARK: 自訂屬性與元件
     
     let webView = WKWebView()
-    @IBOutlet weak var btGetWebPageText: NSButtonCell!
-    @IBOutlet weak var btSendWebPageText: NSButton!
     @IBOutlet weak var edEdit: NSTextField!
     
     // MARK: 預設成員函式
@@ -24,9 +22,10 @@ class ViewController: NSViewController, WKUIDelegate, WKNavigationDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        createWebview()
-        webviewConstraint()
-        loadWebview()
+        setupWebview()      // 設定 webView
+        self.view.addSubview(webView)
+        webviewConstraint() // 約束 webView
+        loadWebview()       // 載入網頁
     }
 
     override var representedObject: Any? {
@@ -36,36 +35,37 @@ class ViewController: NSViewController, WKUIDelegate, WKNavigationDelegate {
     }
     
     // MARK: 自訂成員函式
-    // 建立 WebView
-    fileprivate func createWebview() {
-        
+    // 設定 webView
+    fileprivate func setupWebview() {
         self.webView.uiDelegate = self
         self.webView.navigationDelegate = self
-        
-        webView.frame = .zero
-        self.view.addSubview(webView)
+        let webConfiguration = webView.configuration
+        webConfiguration.userContentController.add(self, name: "AppFunc")
     }
     
-    // 約束 webview
+    // 接受網頁傳回的資訊
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        edEdit.stringValue = message.body as! String
+    }
+    
+    // 約束 webView
     fileprivate func webviewConstraint() {
-        webView.translatesAutoresizingMaskIntoConstraints=false
+        webView.translatesAutoresizingMaskIntoConstraints = false
         
         let ctLeft = NSLayoutConstraint(item: webView, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 20)
         let ctRight = NSLayoutConstraint(item: webView, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1, constant: -20)
         let ctTop = NSLayoutConstraint(item: webView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 50)
         let ctBottom = NSLayoutConstraint(item: webView, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: -20)
         
-        //self.view.addConstraint(ctLeft)
-        //self.view.addConstraint(ctRight)
-        //self.view.addConstraint(ctTop)
-        //self.view.addConstraint(ctBottom)
-        
         NSLayoutConstraint.activate([ctLeft,ctRight,ctTop,ctBottom])
     }
+    
     // 載入網頁
     fileprivate func loadWebview() {
         webView.loadFileURL(URL(string: "file:///Users/heaven/desktop/html/index.htm")!, allowingReadAccessTo: URL(string: "file:///Users/heaven/desktop/html")!)
     }
+    
+    // MARK: 元件綁定的事件
     
     @IBAction func btSendWebPageTextClick(_ sender: Any) {
         let strLabel = edEdit.stringValue

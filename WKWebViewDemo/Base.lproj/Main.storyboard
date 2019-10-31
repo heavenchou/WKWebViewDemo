@@ -750,8 +750,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="btGetWebPageText" destination="g79-5i-mWX" id="Kf5-20-77a"/>
-                        <outlet property="btSendWebPageText" destination="e9v-Cd-9Ey" id="lIy-ef-4J9"/>
                         <outlet property="edEdit" destination="NJC-SF-ggQ" id="ZHE-gn-2dK"/>
                     </connections>
                 </viewController>
