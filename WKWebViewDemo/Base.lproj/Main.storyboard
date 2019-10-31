@@ -711,27 +711,49 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VTX-vj-SXZ">
-                                <rect key="frame" x="14" y="218" width="81" height="32"/>
-                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="g79-5i-mWX">
+                                <rect key="frame" x="14" y="218" width="87" height="32"/>
+                                <buttonCell key="cell" type="push" title="GetText" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="g79-5i-mWX">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="btGetWebPageTextClick:" target="XfG-lQ-9wD" id="wXU-RD-NQk"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="e9v-Cd-9Ey">
-                                <rect key="frame" x="107" y="218" width="81" height="32"/>
-                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fCc-EQ-6HY">
+                                <rect key="frame" x="113" y="218" width="97" height="32"/>
+                                <buttonCell key="cell" type="push" title="SendText" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fCc-EQ-6HY">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <connections>
+                                        <action selector="btSendWebPageTextClick:" target="XfG-lQ-9wD" id="JiX-eI-8gq"/>
+                                    </connections>
                                 </buttonCell>
                             </button>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NJC-SF-ggQ">
+                                <rect key="frame" x="233" y="225" width="234" height="21"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="KDs-du-xIg">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="VTX-vj-SXZ" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="13" id="7nS-we-rzW"/>
+                            <constraint firstItem="NJC-SF-ggQ" firstAttribute="leading" secondItem="e9v-Cd-9Ey" secondAttribute="trailing" constant="29" id="EkD-q0-RFP"/>
                             <constraint firstItem="e9v-Cd-9Ey" firstAttribute="leading" secondItem="VTX-vj-SXZ" secondAttribute="trailing" constant="24" id="G0M-bw-s5M"/>
                             <constraint firstItem="e9v-Cd-9Ey" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="13" id="GIi-zl-ybC"/>
+                            <constraint firstItem="NJC-SF-ggQ" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="13" id="q8G-vS-cZq"/>
                             <constraint firstItem="VTX-vj-SXZ" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="uFQ-r6-MYM"/>
+                            <constraint firstAttribute="trailing" secondItem="NJC-SF-ggQ" secondAttribute="trailing" constant="20" id="yR8-ck-NEM"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btGetWebPageText" destination="g79-5i-mWX" id="Kf5-20-77a"/>
+                        <outlet property="btSendWebPageText" destination="e9v-Cd-9Ey" id="lIy-ef-4J9"/>
+                        <outlet property="edEdit" destination="NJC-SF-ggQ" id="ZHE-gn-2dK"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

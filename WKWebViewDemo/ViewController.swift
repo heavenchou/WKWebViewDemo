@@ -11,8 +11,14 @@ import WebKit
 
 class ViewController: NSViewController, WKUIDelegate, WKNavigationDelegate {
     
-    let webView = WKWebView()
+    // MARK: 自訂屬性與元件
     
+    let webView = WKWebView()
+    @IBOutlet weak var btGetWebPageText: NSButtonCell!
+    @IBOutlet weak var btSendWebPageText: NSButton!
+    @IBOutlet weak var edEdit: NSTextField!
+    
+    // MARK: 預設成員函式
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +35,7 @@ class ViewController: NSViewController, WKUIDelegate, WKNavigationDelegate {
         }
     }
     
-    // MARK: 自訂函式
+    // MARK: 自訂成員函式
     // 建立 WebView
     fileprivate func createWebview() {
         
@@ -58,14 +64,22 @@ class ViewController: NSViewController, WKUIDelegate, WKNavigationDelegate {
     }
     // 載入網頁
     fileprivate func loadWebview() {
-//        let myURL=URL(string: "https://www.apple.com")
-        
-//        let myURL=URL(string: "file:///Users/heaven/desktop/html/index.htm")
-//        let myRequest = URLRequest(url: myURL!)
-//        webView.load(myRequest)
-        
         webView.loadFileURL(URL(string: "file:///Users/heaven/desktop/html/index.htm")!, allowingReadAccessTo: URL(string: "file:///Users/heaven/desktop/html")!)
-        
+    }
+    
+    @IBAction func btSendWebPageTextClick(_ sender: Any) {
+        let strLabel = edEdit.stringValue
+        let strJS =
+        "document.getElementById('MyLabel').innerText = '\(strLabel)'"
+        webView.evaluateJavaScript(strJS)
+    }
+    
+    @IBAction func btGetWebPageTextClick(_ sender: Any) {
+        webView.evaluateJavaScript("GetSel()",
+            completionHandler: {
+            (result, err) in
+            self.edEdit.stringValue = result as! String
+        })
     }
 }
 
