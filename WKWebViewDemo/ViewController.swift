@@ -58,9 +58,14 @@ class ViewController: NSViewController, WKUIDelegate, WKNavigationDelegate {
     }
     // 載入網頁
     fileprivate func loadWebview() {
-        let myURL=URL(string: "https://www.apple.com")
-        let myRequest = URLRequest(url: myURL!)
-        webView.load(myRequest)
+//        let myURL=URL(string: "https://www.apple.com")
+        
+//        let myURL=URL(string: "file:///Users/heaven/desktop/html/index.htm")
+//        let myRequest = URLRequest(url: myURL!)
+//        webView.load(myRequest)
+        
+        webView.loadFileURL(URL(string: "file:///Users/heaven/desktop/html/index.htm")!, allowingReadAccessTo: URL(string: "file:///Users/heaven/desktop/html")!)
+        
     }
 }
 
