@@ -41,11 +41,14 @@ class ViewController: NSViewController, WKUIDelegate, WKNavigationDelegate, WKSc
         self.webView.navigationDelegate = self
         let webConfiguration = webView.configuration
         webConfiguration.userContentController.add(self, name: "AppFunc")
+        webConfiguration.userContentController.add(self, name: "AppFunc1")
     }
     
     // 接受網頁傳回的資訊
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         edEdit.stringValue = message.body as! String
+        print(message.name)
+        print(message.body)
     }
     
     // 約束 webView
